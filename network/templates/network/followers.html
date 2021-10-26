@@ -1,0 +1,16 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    <div>
+        <strong>{{userProfile.username}}</strong> <br>
+        Followers: <br>
+
+        {% for data in followData %}
+            <a href="{% url 'profile' data.follower %}">{{data.follower}} </a> <br>
+        {% endfor %} 
+
+    </div>
+
+
+{% endblock %} 

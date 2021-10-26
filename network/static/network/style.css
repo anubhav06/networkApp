@@ -1,0 +1,39 @@
+.box{
+    border: 0.2px solid rgba(192, 192, 192, 0.5); /* Silver with opacity 0.5 */
+    margin: 2vh 0vh 2vh 0vh;
+    padding: 2vh;
+}
+
+.profilePic{
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+}
+.profilePicSmall{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.profileSection{
+    margin: 20px;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child-left {
+    flex: 0.05;
+}  
+
+
+.flex-child-right {
+    flex: 1;
+}  
+
+.poster{
+    margin-right: 10px;
+}
