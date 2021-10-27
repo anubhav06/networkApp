@@ -1,1 +1,1 @@
-web: gunicorn networkApp
+web: gunicorn networkApp.wsgi
