@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from networkApp import networkApp as application
+import networkApp
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'networkApp.settings')
@@ -17,5 +18,7 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
-    main()
+#if __name__ == '__main__':
+#    main()
+
+app = networkApp
