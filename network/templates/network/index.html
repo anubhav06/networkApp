@@ -65,10 +65,11 @@
                             </div>
                             <div class="likes" id="likes{{post.id}}" style="display: inline;">
                                 {% if post in likedPosts %}
-                                    <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: red;">
+                                    <img src="{% static 'network/likeRed.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="display: inline;">
                                 {% else %}
-                                    <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: white;">
+                                    <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="display: inline;">
                                 {% endif %}
+                                
                                 <div class="noOfLikes" id="noOfLikes{{post.id}}" style="display: inline;">
                                     {{post.likes}}
                                 </div>

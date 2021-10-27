@@ -22,34 +22,43 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
 
-        if(element.id.indexOf('like-btn') > -1){
-
+        if( element.id.startsWith('like-btn') ){
             // Get the clicked element id and split the actuall id from `like-btn`
             const id = element.id.split('like-btn')[1]
 
-            // If its not liked
-            if (element.style.backgroundColor == 'white'){
-                canLike = true
-                canUnlike = false
-            }       
+            //Get the like image of the post by its ID
+            var likeImg = document.getElementById(`like-btn${id}`);
+            
+                   
             // If its already liked
-            else if (element.style.backgroundColor == 'red'){
+            if ( likeImg.src.match("likeRed") ){
                 canUnlike = true
                 canLike = false
             }
+            // If its not liked
+            else if ( likeImg.src.match("like") ){
+                canLike = true
+                canUnlike = false
+            }
+            else{
+                console.log('ERROR: No image found with that name!')
+            }
+
 
             if (canLike == true){
-                like(id, canLike, canUnlike)
+                like(id, likeImg, canLike, canUnlike)
             }
             else if(canUnlike == true){
-                unlike(id, canLike, canUnlike )
+                unlike(id, likeImg, canLike, canUnlike )
             }
         }
+
     })
 
 })
 
-
+// For CSRF Token 
+// Ref: https://docs.djangoproject.com/en/3.2/ref/csrf/
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -65,6 +74,7 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
 
 function editFormSubmit(id){
 
@@ -83,12 +93,12 @@ function editFormSubmit(id){
         // Show the updated data
         document.querySelector(`#content${id}`).innerHTML = `${post[0].content}`
     })
-
     return false;
 };
 
 
-function like(id, canLike, canUnlike){
+
+function like(id, likeImg, canLike, canUnlike){
     
     const csrftoken = getCookie('csrftoken')
 
@@ -102,7 +112,10 @@ function like(id, canLike, canUnlike){
     })
     .then(response => response.json)
     .then( () => {
-        document.querySelector(`#like-btn${id}`).style.backgroundColor = 'Red'
+        //Change the 'like' image to 'liked' image
+        likeImg.setAttribute("src", "static/network/likeRed.png");
+
+        //To update the likes on the client side
         var oldLikes = document.querySelector(`#noOfLikes${id}`).innerHTML;
         oldLikes = parseInt(oldLikes)
         document.querySelector(`#noOfLikes${id}`).innerHTML = `${oldLikes + 1}`
@@ -110,10 +123,11 @@ function like(id, canLike, canUnlike){
         canUnlike = true
         canLike = false
     })
-
 }
 
-function unlike(id, canLike, canUnlike){
+
+
+function unlike(id, likeImg, canLike, canUnlike){
     
     const csrftoken = getCookie('csrftoken')
 
@@ -127,7 +141,10 @@ function unlike(id, canLike, canUnlike){
     })
     .then(response => response.json)
     .then( () => {
-        document.querySelector(`#like-btn${id}`).style.backgroundColor = 'white'
+        //Change the 'liked' image to 'like' image
+        likeImg.setAttribute("src" , "static/network/like.png");
+
+        //To update the likes on the client side
         var oldLikes = document.querySelector(`#noOfLikes${id}`).innerHTML;
         oldLikes = parseInt(oldLikes)
         document.querySelector(`#noOfLikes${id}`).innerHTML = `${oldLikes - 1}`
@@ -135,5 +152,4 @@ function unlike(id, canLike, canUnlike){
         canLike = true
         canUnlike = false
     })
-
 }

@@ -228,7 +228,6 @@ def like(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required"}, status=400)
     
-    print('Like works')
     data = json.loads(request.body)
     
     likes = data.get("likes", "")
@@ -244,12 +243,9 @@ def like(request):
     
     # If post is not liked by the current user
     if likeOpn is None:
-        print('Not liked already')
         post.likedBy.add(request.user)
         newLikes = post.likes + 1
         Posts.objects.filter(id = id).update(likes = newLikes)
-    else:
-        print('Already Liked')
 
     return JsonResponse({"message": "testing likes"}, status=201)
 
@@ -258,7 +254,6 @@ def unlike(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required"}, status=400)
     
-    print('Unlike works')
     data = json.loads(request.body)
     
     likes = data.get("likes", "")
@@ -277,7 +272,6 @@ def unlike(request):
         print('ERROR: Must have liked already!')
         return
     else:
-        print('Disliking now')
         post.likedBy.remove(request.user)
         newLikes = post.likes - 1
         Posts.objects.filter(id = id).update(likes = newLikes)
