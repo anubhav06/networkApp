@@ -19,7 +19,7 @@ from .models import User, Posts, Follow
 
 
 
-
+@login_required(login_url="/login")   
 def index(request):
 
     if request.method == "POST":
