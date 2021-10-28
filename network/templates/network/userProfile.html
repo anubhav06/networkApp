@@ -3,71 +3,91 @@
 
 {% block body %}
 
-    <div class="profileSection">
+    <div class="row">
+        <div class="indexPage-left"> </div>
+        <div class="indexPage-middle">
 
-        <img src="{% static 'network/profilePic.png' %}" alt="Profile Picture" class="profilePic"> <br>
-        <strong>{{userProfile.username}}</strong> <br>
-        Followers: 
-        <a href="{% url 'followers' userProfile %}"> {{followCount}} <br> </a>
+            <div class="profileSection">
+
+                <img src="{% static 'network/profilePic.png' %}" alt="Profile Picture" class="profilePic"> <br>
+                <div class="profileName"> <strong>{{userProfile.username}}</strong> </div>
+                Followers: 
+                <a href="{% url 'followers' userProfile %}"> {{followCount}} <br> </a>
+                
+                {% if showBtn %}
+                <form action="{% url 'profile' userProfile %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" name="btn"> {{btnTxt}} </button>
+                </form>
+                {% endif %}     
+                <br>
+                <div style="text-decoration: underline;"> <strong> POSTS: </strong></div>
+                
+            </div>
         
-        {% if showBtn %}
-        <form action="{% url 'profile' userProfile %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="btn"> {{btnTxt}} </button>
-        </form>
-        {% endif %}     
-        <br>
-        <div style="text-decoration: underline;"> <strong> POSTS: </strong></div>
+                
         
+            {% for post in posts %}
+            <!-- DONT CHANGE THE "ID" OF ANY ELEMENT OR THE APP WILL BREAK, (REF: JS FILE) -->
+                <div class="box" id="box{{post.id}}">
+                    <div class="post" id="post{{post.id}}">
+                        <div class="row">
+                            
+                            <div class="posts-left">
+                                <img src="{% static 'network/profilePic.png' %}" alt="Profile Picture" class="profilePicSmall">
+                            </div>
+        
+                            <div class="posts-right">
+        
+                                <div class="poster" id="poster{{post.id}}" style="display: inline;">
+                                    <a href="{% url 'profile' post.poster %}">
+                                        <strong>{{post.poster}}</strong>
+                                    </a>
+                                </div>
+                        
+                                <div class="timestamp" id="timestamp{{post.id}}" style="display: inline;">
+                                    {{post.timestamp}} <br>
+                                </div>
+                                
+                                {% if user == post.poster %}
+                                    <button class="edit-btn" id="edit-btn{{post.id}}" > Edit </button>
+                                {% endif %}
+                                
+                                <div class="content" id="content{{post.id}}" style="white-space: pre-line" >
+                                    {{post.content}} <br>
+                                </div>
+                                <div class="likes" id="likes{{post.id}}" style="display: inline;">
+                                    {% if post in likedPosts %}
+                                        <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: red;">
+                                    {% else %}
+                                        <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: white;">
+                                    {% endif %}
+                                    <div class="noOfLikes" id="noOfLikes{{post.id}}" style="display: inline;">
+                                        {{post.likes}}
+                                    </div>
+                                </div>
+        
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+        <div class="indexPage-right">
+            <br>
+            <div class="subheading">What's going on?</div>
+            <br>
+              <img src="{% static 'network/comingSoon.jpg' %}" alt="coming soon" class="comingSoon"> 
+            <br><br><br>
+
+            <div class="subheading">Whom to follow?</div>
+            <br>
+                <img src="{% static 'network/comingSoon.jpg' %}" alt="coming soon" class="comingSoon">
+            <br><br>
+        </div>
     </div>
 
-        
-
-    {% for post in posts %}
-    <!-- DONT CHANGE THE "ID" OF ANY ELEMENT OR THE APP WILL BREAK, (REF: JS FILE) -->
-        <div class="box" id="box{{post.id}}">
-            <div class="post" id="post{{post.id}}">
-                <div class="flex-container">
-                    
-                    <div class="flex-child-left">
-                        <img src="{% static 'network/profilePic.png' %}" alt="Profile Picture" class="profilePicSmall">
-                    </div>
-
-                    <div class="flex-child-right">
-
-                        <div class="poster" id="poster{{post.id}}" style="display: inline;">
-                            <a href="{% url 'profile' post.poster %}">
-                                <strong>{{post.poster}}</strong>
-                            </a>
-                        </div>
-                
-                        <div class="timestamp" id="timestamp{{post.id}}" style="display: inline;">
-                            {{post.timestamp}} <br>
-                        </div>
-                        
-                        {% if user == post.poster %}
-                            <button class="edit-btn" id="edit-btn{{post.id}}" > Edit </button>
-                        {% endif %}
-                        
-                        <div class="content" id="content{{post.id}}" style="white-space: pre-line" >
-                            {{post.content}} <br>
-                        </div>
-                        <div class="likes" id="likes{{post.id}}" style="display: inline;">
-                            {% if post in likedPosts %}
-                                <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: red;">
-                            {% else %}
-                                <img src="{% static 'network/like.png' %}" alt="likeBtn" height="20" width="auto" class="like-btn" id="like-btn{{post.id}}" style="background-color: white;">
-                            {% endif %}
-                            <div class="noOfLikes" id="noOfLikes{{post.id}}" style="display: inline;">
-                                {{post.likes}}
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    {% endfor %}
 
 {% endblock %} 

@@ -1,16 +1,41 @@
 {% extends "network/layout.html" %}
+{% load static %}
+
 
 {% block body %}
 
-    <div>
-        <strong>{{userProfile.username}}</strong> <br>
-        Followers: <br>
-
-        {% for data in followData %}
-            <a href="{% url 'profile' data.follower %}">{{data.follower}} </a> <br>
-        {% endfor %} 
-
+    <div class="subheading">
+        {{userProfile.username}} Followers:
     </div>
+
+    <div class="row">
+        <div class="indexPage-left"></div>
+        <div class="indexPage-middle">
+
+            <div>
+                {% for data in followData %}
+                    ->  <a href="{% url 'profile' data.follower %}">{{data.follower}} </a> <br>
+                {% endfor %} 
+        
+            </div>
+
+        </div>
+        <div class="indexPage-right">
+            <br>
+            <div class="subheading">What's going on?</div>
+            <br>
+              <img src="{% static 'network/comingSoon.jpg' %}" alt="coming soon" class="comingSoon"> 
+            <br><br><br>
+
+            <div class="subheading">Whom to follow?</div>
+            <br>
+                <img src="{% static 'network/comingSoon.jpg' %}" alt="coming soon" class="comingSoon">
+            <br><br>
+        </div>
+    </div>
+
+
+    
 
 
 {% endblock %} 

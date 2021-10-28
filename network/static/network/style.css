@@ -11,16 +11,18 @@ body{
 
 .box{
     border: 0.2px solid rgba(192, 192, 192, 0.5); /* Silver with opacity 0.5 */
-    margin: 2vh 0vh 2vh 0vh;
+    margin: 0vh 0vh 2vh 0vh;
     padding: 2vh;
 }
 
 .profilePic{
+    border: 5px solid grey;
     border-radius: 50%;
     height: 100px;
     width: 100px;
     margin-bottom: 10px;
 }
+
 .profilePicSmall{
     border-radius: 50%;
     height: 50px;
@@ -29,7 +31,8 @@ body{
 }
 
 .profileSection{
-    margin: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .flex-container {
@@ -149,3 +152,91 @@ body{
       text-align: left;
     }
 }
+
+ /* For index page */
+ .indexPage-left {
+    width: 3%;
+    float: left;
+    padding: 15px;
+}
+ .indexPage-middle {
+    width: 57%;
+    float: left;
+    padding: 15px;
+}
+
+.indexPage-right  {
+    width: 30%;
+    float: left;
+    padding: 15px;
+    /*display: block;
+    margin: auto;*/
+}
+@media screen and (max-width: 600px) {
+    .indexPage-right {display: none;}
+    .indexPage-left {display: none;}
+    .indexPage-middle {
+        width: 100%;
+    }
+    .body{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+}
+
+.posts-left{
+    width: 8%;
+    float: left;
+    padding: 15px;
+}
+
+.posts-right{
+    width: 92%;
+    float: left;
+    padding: 15px;
+}
+
+@media screen and (max-width: 600px) {
+    .posts-left{
+        width: 17%;
+    }
+    
+    .posts-right{
+        width: 83%;
+    }
+}
+
+.subheading{
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.poster{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.timestamp{
+    color: grey;
+}
+
+.edit-btn{
+    font-size: 10px;
+    background-color: #555555;
+    color: white;
+}
+
+.profileName{
+    font-size: 22px;
+}
+
+.comingSoon{
+    width: 250px;
+    height: auto;
+}
+
+
