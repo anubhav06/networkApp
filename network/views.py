@@ -26,6 +26,10 @@ def index(request):
         if request.user is None:
             return HttpResponse('User not logged in')
 
+        content = request.POST["content"]
+        if content.isspace() or content is "":
+            return HttpResponse('Content of post cannot be empty')
+        
         post = Posts(content= request.POST["content"], poster= request.user)
         post.save()
 
