@@ -1,7 +1,6 @@
 from django.http import response
 from django.test import TestCase, Client, client
 from .models import Posts, Follow, User
-
 # Create your tests here.
 
 
@@ -10,10 +9,12 @@ class PostsTestCase(TestCase):
     def setUp(self):
 
         # Create Users
-        u1 = User.objects.create(username = "aaa", email="aaa@test.com", password="aaa")
-        #u1.set_password("aaa")
-        u2 = User.objects.create(username = "bbb", email="bbb@test.com", password="bbb")
+        u1 = User.objects.create(username = "aaa", email="aaa@test.com")
+        u1.set_password("aaa")
+        u1.save()
+        u2 = User.objects.create(username = "bbb", email="bbb@test.com")
         u2.set_password("bbb")
+        u2.save()
 
         # Create Posts
         p1 = Posts.objects.create(content="abc", likes=0, timestamp="Oct. 28, 2021, 4 p.m.", poster=u1)
@@ -65,9 +66,26 @@ class PostsTestCase(TestCase):
         response = c.get("/aaa/followers")
         self.assertEqual(response.status_code, 302)
 
-    # TODO: Later. Tests after user logs in
-    #def test_valid_login(self):
-    #    c = Client()
-    #    response = c.post('/login/', {'username': 'aaa', 'password': 'abc'})
-    #    self.assertEqual(response.status_code, 200)
+    def test_valid_login(self):
+        c = Client()
+        c.login(username = 'aaa', password = 'aaa')
+        response = c.get("")
+        self.assertEqual(response.status_code, 200)
 
+    def test_valid_profile(self):
+        c = Client()
+        c.login(username = "aaa", password = "aaa")
+        response = c.get("/aaa/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_valid_following(self):
+        c = Client()
+        c.login(username = "aaa", password = "aaa")
+        response = c.get("/following")
+        self.assertEqual(response.status_code, 200)
+
+    def test_valid_followers(self):
+        c = Client()
+        c.login(username = "aaa", password = "aaa")
+        response = c.get("/aaa/followers")
+        self.assertEqual(response.status_code, 200)
