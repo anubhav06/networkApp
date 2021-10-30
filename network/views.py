@@ -172,7 +172,7 @@ def profile(request, name):
             "showBtn" : showBtn
         })
 
-
+@login_required(login_url="/login")  
 def followers(request, name):
     
     try:
@@ -187,6 +187,7 @@ def followers(request, name):
         "followData" : followData,
     })
 
+@login_required(login_url="/login")  
 def following(request):
 
     try:
