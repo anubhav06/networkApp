@@ -20,6 +20,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Migrate Database
+      env: 
+        SECRET_KEY: x#alj_^1_xh1)ke909ao0c#(9y4=-*nqhx%yjc^zah*i8ehi@3
+        DEBUG: True
       run: |
         python3 manage.py makemigrations network
         python3 manage.py migrate
