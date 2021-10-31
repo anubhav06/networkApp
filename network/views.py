@@ -26,6 +26,10 @@ def index(request):
         if request.user is None:
             return HttpResponse('User not logged in')
 
+        content = request.POST["content"]
+        if content.isspace() or content is "":
+            return HttpResponse('Content of post cannot be empty')
+        
         post = Posts(content= request.POST["content"], poster= request.user)
         post.save()
 
@@ -168,7 +172,7 @@ def profile(request, name):
             "showBtn" : showBtn
         })
 
-
+@login_required(login_url="/login")  
 def followers(request, name):
     
     try:
@@ -183,6 +187,7 @@ def followers(request, name):
         "followData" : followData,
     })
 
+@login_required(login_url="/login")  
 def following(request):
 
     try:
@@ -192,7 +197,7 @@ def following(request):
         following = None
         #posts = None
 
-    post_list = Posts.objects.filter(poster__in = following.values_list('toFollow', flat=True)).all()
+    post_list = Posts.objects.filter(poster__in = following.values_list('toFollow', flat=True)).order_by('-id').all()
     paginator = Paginator(post_list, 10) # Show 10 posts per page
 
     page_number = request.GET.get('page')

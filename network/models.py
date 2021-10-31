@@ -30,7 +30,9 @@ class Posts(models.Model):
             "timestamp": self.timestamp,
             "poster" : self.poster.id
         }
-
+    
+    def is_valid_post(self):
+        return self.likes >= 0 and self.content != ""
 
 class Follow(models.Model):
 
