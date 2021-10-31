@@ -125,6 +125,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 #django_heroku.settings(locals())
-if '/django-network-app' in os.environ:
+if 'I_AM_HEROKU' in os.environ:
     import django_heroku
     django_heroku.settings(locals())
