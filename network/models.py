@@ -31,6 +31,8 @@ class Posts(models.Model):
             "poster" : self.poster.id
         }
 
+    def is_valid_post(self):
+        return self.likes >= 0 and self.content != ""
 
 class Follow(models.Model):
 
