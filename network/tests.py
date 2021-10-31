@@ -23,7 +23,6 @@ class PostsTestCase(TestCase):
         p2.likedBy.add(u1)
         p3 = Posts.objects.create(content="", likes=0, timestamp="Oct. 27, 2021, 4 p.m.", poster=u2)
         p3.likedBy.add(u2)
-    
 
     def test_valid_post(self):
         u1 = User.objects.get(username="aaa")
@@ -35,14 +34,12 @@ class PostsTestCase(TestCase):
         u1 = User.objects.get(username="aaa")
         p = Posts.objects.get(likedBy=u1, poster=u1)
         self.assertFalse(p.is_valid_post())
-    
 
     def test_invalid_postContent(self):
         u2 = User.objects.get(username="bbb")
         p = Posts.objects.get(likedBy=u2, poster=u2)
         self.assertFalse(p.is_valid_post())
 
-    
     def test_valid_index(self):
         c = Client()
         response = c.get("")
@@ -54,13 +51,11 @@ class PostsTestCase(TestCase):
         response = c.get("/following")
         self.assertEqual(response.status_code, 302)
 
-    
     def test_valid_userPage(self):
         c = Client()
         response = c.get("/aaa/")
         self.assertEqual(response.status_code, 302)
 
-    
     def test_valid_userFollowersPage(self):
         c = Client()
         response = c.get("/aaa/followers")

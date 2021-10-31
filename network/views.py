@@ -29,7 +29,6 @@ def index(request):
         content = request.POST["content"]
         if content.isspace() or content is "":
             return HttpResponse('Content of post cannot be empty')
-        
         post = Posts(content= request.POST["content"], poster= request.user)
         post.save()
 
