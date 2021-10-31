@@ -9,10 +9,10 @@ class PostsTestCase(TestCase):
     def setUp(self):
 
         # Create Users
-        u1 = User.objects.create(username = "aaa", email="aaa@test.com")
+        u1 = User.objects.create(username = "aaa", email="aaa@test.com", password="aaa")
         u1.set_password("aaa")
         u1.save()
-        u2 = User.objects.create(username = "bbb", email="bbb@test.com")
+        u2 = User.objects.create(username = "bbb", email="bbb@test.com", password="bbb")
         u2.set_password("bbb")
         u2.save()
 

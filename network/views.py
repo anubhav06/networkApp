@@ -197,7 +197,7 @@ def following(request):
         following = None
         #posts = None
 
-    post_list = Posts.objects.filter(poster__in = following.values_list('toFollow', flat=True)).all()
+    post_list = Posts.objects.filter(poster__in = following.values_list('toFollow', flat=True)).order_by('-id').all()
     paginator = Paginator(post_list, 10) # Show 10 posts per page
 
     page_number = request.GET.get('page')
