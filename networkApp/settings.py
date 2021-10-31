@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-#django_heroku.settings(locals())
+# https://github.com/heroku/django-heroku/issues/39
 if '/app' in os.environ:
     import django_heroku
     django_heroku.settings(locals())
