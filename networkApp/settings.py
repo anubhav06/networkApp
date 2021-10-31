@@ -124,6 +124,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+#https://github.com/heroku/django-heroku/issues/39
 #django_heroku.settings(locals())
 if 'I_AM_HEROKU' in os.environ:
     import django_heroku
