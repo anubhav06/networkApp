@@ -54,11 +54,11 @@ Deployed at https://django-network-app.herokuapp.com/.
 
 This was made to understand the concepts of Django and Web Development. Also, the best way to understand is by building a real world existing project. Thus, presenting 'Network' which helps in understanding how to make a social-networking web application.
 
-## :gear: How we built it
+### How we built it
 
 The backend is built using `Django` framework. While the frontend is built using `HTML, CSS and JavaScript`. 
 
-## 🐱‍💻 Quick Try Out
+### Quick Try Out
 
 To get a quick hands-on experience of how the project works:
 1. Go to https://django-network-app.herokuapp.com/
